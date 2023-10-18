@@ -3,18 +3,16 @@ import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(
-    @Inject('NOTIFICATION_SERVICE') private readonly client: ClientProxy,
-  ) {}
+  constructor(@Inject('NOTIFICATION_SERVICE') private client: ClientProxy) {}
 
   @Post()
   async createOrder(
-    @Body('customerEmail') customerEmail: string,
-    @Body('orderNo') orderNo: number,
+    @Body('customer') customer: string,
+    @Body('orderNo') orderNo: string,
   ) {
-    this.client.emit('order_created', { customerEmail, orderNo });
+    this.client.emit('order_created', { customer, orderNo });
     return {
-      customerEmail,
+      customer,
       orderNo,
     };
   }

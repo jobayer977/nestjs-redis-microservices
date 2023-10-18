@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { OrdersController } from './orders.controller';
 
 @Module({
+  controllers: [OrdersController],
   imports: [
     ClientsModule.register([
       {
@@ -16,6 +17,5 @@ import { OrdersController } from './orders.controller';
       },
     ]),
   ],
-  controllers: [OrdersController],
 })
 export class OrdersModule {}
